@@ -4,16 +4,15 @@
 - Updating.....
 
 ## Main technology
-- 
 - [ReactJs](https://github.com/facebook/react)
 - [React-router V6](https://github.com/remix-run/react-router)
 - [Mui/material](https://github.com/mui/material-ui)
 - [Firebase](https://github.com/firebase/firebase-js-sdk)
-- FakeApi
+- [FakeApi]
 - [Framer Motion](https://github.com/framer/motion)
 - [React Slick](https://github.com/akiran/react-slick)
 - [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
-
+- [Animate On Scroll](https://github.com/michalsnik/aos)
 ## Install Server
 - Move path
 ```shell

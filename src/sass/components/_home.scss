@@ -1,0 +1,52 @@
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1)
+}
+
+.promotional__image {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    
+    @include tablet {
+        height: 500px;
+    }
+}
+
+.promotional__title{
+    line-height: 1.7;
+    color: #101010;
+    margin-bottom: 0.25rem;
+    text-align: center;
+    font-weight: 300;
+    color: #101010;
+    font-weight: 300;
+
+    p:first-child{
+        font-weight: 500;
+        font-size: 24px;
+    }
+    p:last-child{
+        font-size: 16px;
+    }
+}
+
+.promotional__banner {
+    &__title{
+        cursor: pointer;
+        padding-top: 20px;
+        font-size: 1.7rem;
+        color: #444444;
+        margin-bottom: 8px;
+        font-weight: normal;
+        line-height: 1.4;
+
+        &:hover {
+            color: #ee4266;
+        }
+    }
+
+
+}
