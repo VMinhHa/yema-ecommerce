@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter, Link, Route } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
 import Header from './Header'

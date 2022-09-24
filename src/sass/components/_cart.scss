@@ -37,6 +37,11 @@
         @include mobile {
             width: 100%;
         }
+
+        &__empty {
+            text-align: center;
+            font-size: 1.75rem;
+        }
     }
 
     &__info {

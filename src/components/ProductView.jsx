@@ -9,6 +9,7 @@ import numberWithDots from '../utils/numberWithDots'
 import { useNavigate } from 'react-router-dom';
 import {useDispatch}  from 'react-redux'
 import {addToCart} from '../redux/cart/cartItemSlice'
+import { remove } from 'redux/product-modal/productModalSlice';
 
 const ProductView = ({product}) => {
 
@@ -19,8 +20,6 @@ const ProductView = ({product}) => {
             colors: [],
             size: [],
     }
-
-    
 
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
@@ -65,7 +64,6 @@ const ProductView = ({product}) => {
     }
 
     const handleAddToCart = () => {
-        
         if (check()) {
             // console.log({ color, size, quantity })
             dispatch(addToCart({
@@ -78,6 +76,7 @@ const ProductView = ({product}) => {
             enqueueSnackbar('Đã thêm sản phẩm vào giỏ hàng', { variant: 'success' })
         } 
     }
+
     const goToCart = () => {
         if (check()) {
             dispatch(addToCart({
@@ -87,6 +86,7 @@ const ProductView = ({product}) => {
                 size: size,
                 price: product.price,
             }))
+            dispatch(remove());
             navigate('/cart');
         }
     }

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
+import empty from '../assets/images/empty-cart.png'
 
 import Helmet from '../components/Helmet'
 import { cartItemsSelector, cartItemsCountSelector, cartTotalSelector } from '../redux/cart/selector'
@@ -10,22 +11,38 @@ import numberWithDots from '../utils/numberWithDots'
 import CartItem from '../components/CartItem'
 import productData from '../assets/fake-data/products'
 
+import { showForm } from 'redux/auth/userSlice'
+import { useSnackbar } from 'notistack';
+import { clearCart } from 'redux/cart/cartItemSlice'
+
 const Cart = () => {
+
+	const dispatch = useDispatch()
 
     const cartItems = useSelector(cartItemsSelector)
     const cartItemsCount = useSelector(cartItemsCountSelector)
     const cartTotal  = useSelector(cartTotalSelector)
     const [cartProducts, setCartProducts] = useState(productData.getCartItemsInfo(cartItems))
+	const loggedInUser = useSelector(state => state.user.current)
+	const isLoggedIn = !!loggedInUser.id
 
     // console.log('cartItems: ',cartItems);
     // console.log('cartItemsCount:', cartItemsCount);
     // console.log('cartTotal:',cartTotal);
 	// console.log('getCartItemsInfo',productData.getCartItemsInfo(cartItems));
-
-	
+	const {enqueueSnackbar} = useSnackbar()
 	useEffect(() => {
 		setCartProducts(productData.getCartItemsInfo(cartItems))
 	}, [cartItems])
+
+	const handleCheckout = () => {
+		if (isLoggedIn) {
+			enqueueSnackbar('Đặt hàng thành công', {variant: 'success'})
+			dispatch(clearCart())
+		} else {
+			dispatch(showForm())
+		}
+	}
 
   return (
     <Helmet title="Cart">
@@ -48,8 +65,23 @@ const Cart = () => {
 						<span> đ {numberWithDots(cartTotal)}</span>
 					</div>
 				</div>
+				{/* {
+					loggedInUser.id && (
+						<div className="cart__info__user">
+							<h4>Thông tin người nhận</h4>
+							<div className="cart__info__user__info">
+
+								<input type="text" placeholder="Họ và tên" 
+									value={user.fullName}
+								/>
+							</div>
+						</div>
+					)
+				} */}
 				<div className="cart__info__btn">
-					<Button size="block">Đặt hàng</Button>
+					<Button size="block" 
+						onClick={handleCheckout}
+					>Đặt hàng</Button>
 					<Link to='/catalog'>
 						<Button size="block">Tiếp tục mua hàng</Button>
 					</Link>
@@ -84,10 +116,18 @@ const Cart = () => {
 			</div>
 			<div className="cart__list">
 				{
-					cartProducts.map((item,index) => (
-						<CartItem key={index} item={item} />
-					))
+					cartProducts.length > 0 ? (
+						cartProducts.map((item,index) => (
+							<CartItem key={index} item={item} />
+						))
+					) : (
+						<div className="cart__list__empty">
+							<h4 className='cart__list__empty__title'>Giỏ hàng của bạn đang trống</h4>
+							<img className='cart__list__empty__img' src={empty} alt="empty cart" />
+						</div>
+					)
 				}
+
 			</div>
 		</div>
 	</Helmet>

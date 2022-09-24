@@ -2,8 +2,6 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-import Grid from './Grid'
-
 import logo from '../assets/images/yame-logo.png'
 import check from '../assets/images/dathongbao.png'
 

@@ -1,0 +1,12 @@
+.contact {
+    font-size: 1.2rem;
+    font-weight: 300;
+    p{
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    &__video {
+        max-width: 100%;
+    }
+}

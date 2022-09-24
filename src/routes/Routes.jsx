@@ -7,6 +7,7 @@ import Catalog from '../pages/Catalog'
 import Cart from '../pages/Cart'
 import Product from '../pages/Product'
 import NotFound from '../pages/NotFound'
+import Contact from 'pages/Contact'
 
 const routes = () => {
   return (
@@ -15,6 +16,7 @@ const routes = () => {
         <Route path="/catalog/:slug" element={<Product />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
     </Routes>
     )

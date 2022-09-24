@@ -1,12 +1,28 @@
-import React, { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import logo from '../assets/images/yame-logo.png'
-// import logo from '../assets/images/Logo-2.png'
-
 import { motion } from 'framer-motion'
-import { useDispatch, useSelector } from 'react-redux'
+
+import { useSelector } from 'react-redux'
 import { cartItemsCountSelector } from '../redux/cart/selector'
+import LoginModal from './LoginModal'
+// import Slide from '@mui/material/Slide';
+// import Register from '../Auth/components/Register'
+// import Login from '../Auth/components/Login'
+
+// import Button from '@mui/material/Button';
+// import Dialog from '@mui/material/Dialog';
+// import DialogActions from '@mui/material/DialogActions';
+// import DialogContent from '@mui/material/DialogContent';
+// // import DialogContentText from '@mui/material/DialogContentText';
+// // import DialogTitle from '@mui/material/DialogTitle';
+
+// import { Box, IconButton } from '@mui/material'
+// import CloseIcon from '@mui/icons-material/Close';
+// import DropdownUser from 'Auth/components'
+// import LoginModal from './LoginModal'
+
+// import { showForm, hideForm } from 'redux/auth/userSlice'
 
 const mainNav = [
   {
@@ -27,16 +43,26 @@ const mainNav = [
   },
 ]
 
+// const Transition = React.forwardRef(function Transition(props, ref) {
+// 	return <Slide direction="up" ref={ref} {...props} />;
+//   });
+  
+//   const MODE = {
+// 	LOGIN: 'login',
+// 	REGISTER: 'register',
+//   }
 const Header = () => {
+	//Login	
+	// const loggedInUser = useSelector(state => state.user.current)
+	// const isLoggedIn = !!loggedInUser.id
 	
+	// const dispatch = useDispatch()
 	const cartItemsCount = useSelector(cartItemsCountSelector)
-
 	const [isActive, setIsActive] = useState(false);
-	
 	const { pathname } = useLocation();
 	const activeNav = mainNav.findIndex(e => e.path === pathname);
-
 	const headerRef = useRef(null);
+    // const [mode, setMode] = useState(MODE.LOGIN);
 
 	useEffect(() => {
 		window.addEventListener('scroll', () => {
@@ -63,9 +89,20 @@ const Header = () => {
 		e.preventDefault();
     };
 
+	// const [open, setOpen] = useState(false);
+
+	// const handleClickOpen = () => {
+	// 	// dispatch(showForm())
+	// 	setOpen(true);
+	// };
+
+	// const handleClose = () => {
+	// 	// dispatch(hideForm())
+	// 	setOpen(false);
+	// };
+
   return (
-	<div
-		className='header' ref={headerRef}>
+	<div className='header' ref={headerRef}>
 		<div className={`search__wrap ${isActive ? 'active' : '' }`}>
 			<div className="container">
 				<a href="" className='search__close' >
@@ -126,14 +163,74 @@ const Header = () => {
 							onClick={handleClick}
 							></i>
 					</motion.div>
-
-					<motion.div 
-						whileTap={{
-							scale: 0.75
-						}}
+					
+					{/* <div 
 						className="header__menu__item header__menu__right__item">
-						<i className='bx bx-user'></i>
-					</motion.div>
+						{
+							!isLoggedIn && (
+								<button 
+									className='header__menu__item__btn'
+									onClick={handleClickOpen}>
+										Đăng nhập 
+								</button>
+							)
+						}
+						{
+							isLoggedIn && (
+								<DropdownUser/>
+							)
+						} */}
+
+						{/*
+						<Dialog
+							disableEscapeKeyDown
+							open={open}
+							TransitionComponent={Transition}
+							keepMounted
+							onClose={handleClose}
+							// aria-describedby="alert-dialog-slide-description"
+						>
+							{/* <DialogTitle>{"Login"}</DialogTitle> 
+							<IconButton style={{ position: "absolute", top: "8px", right: "8px"}}
+          						onClick={handleClose}
+							>
+							<CloseIcon />
+							</IconButton>
+
+							<DialogContent>
+							{mode === MODE.REGISTER && (
+								<>
+								<Register closeDialog={handleClose} /> 
+
+								<Box textAlign="center">
+									<Button color="primary" onClick={() => setMode(MODE.LOGIN)} >
+									Already have an account. Login here.
+									</Button>
+								</Box>
+								</>
+							)}
+
+							{mode === MODE.LOGIN && (
+								<>
+								<Login closeDialog={handleClose} />
+								
+								<Box textAlign="center">
+									<Button color="primary" 
+									onClick={() => setMode(MODE.REGISTER)} >
+									Don't have an account. Register here.
+									</Button>
+								</Box>
+								</>
+							)}
+				
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleClose}>Cancel</Button>
+							</DialogActions>
+						</Dialog> */}
+
+					{/* </div> */}
+					<LoginModal />
 
 					<div
 						className="header__menu__item header__menu__right__item">
